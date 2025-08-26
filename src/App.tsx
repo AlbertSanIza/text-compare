@@ -134,9 +134,8 @@ export default function App() {
                         />
                     </div>
                 </div>
-                {leftText.length > 0 && rightText.length > 0 && (
-                    <div className="mt-8">
-                        <h3 className="mb-4 text-lg font-semibold text-gray-700">Differences</h3>
+                {(leftText.length > 0 || rightText.length > 0) && (
+                    <div>
                         <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
                             <div className="grid grid-cols-2 divide-x divide-gray-200">
                                 {/* Left Diff */}
