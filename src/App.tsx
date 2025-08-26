@@ -3,6 +3,8 @@ import { ArrowDown, ArrowUp } from 'lucide-react'
 import { useMemo, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
 
 interface DiffLine {
     lineNumber: number
@@ -105,35 +107,27 @@ export default function App() {
                     <Button onClick={handleClearAll}>Clear all</Button>
                 </div>
             </div>
-            <div className="mx-auto max-w-6xl px-6 py-8">
-                <div className="grid grid-cols-2 gap-8">
-                    {/* Left Text Area */}
-                    <div className="space-y-4">
-                        <h3 className="text-lg font-semibold text-gray-700">Original Text</h3>
-                        <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
-                            <div className="border-b border-gray-200 bg-gray-50 px-4 py-2">
-                                <textarea
-                                    value={leftText}
-                                    onChange={(e) => setLeftText(e.target.value)}
-                                    placeholder="Enter or paste your original text here..."
-                                    className="h-32 w-full resize-none border-0 bg-transparent font-mono text-sm focus:outline-none"
-                                />
-                            </div>
-                        </div>
+            <div className="mx-auto flex max-w-7xl flex-col gap-6 p-6">
+                <div className="flex items-start gap-6">
+                    <div className="grid w-full gap-3">
+                        <Label htmlFor="left-text">Left Text</Label>
+                        <Textarea
+                            id="left-text"
+                            className="bg-slate-50"
+                            placeholder="Enter or paste your left text here..."
+                            value={leftText}
+                            onChange={(event) => setLeftText(event.target.value)}
+                        />
                     </div>
-                    {/* Right Text Area */}
-                    <div className="space-y-4">
-                        <h3 className="text-lg font-semibold text-gray-700">Modified Text</h3>
-                        <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
-                            <div className="border-b border-gray-200 bg-gray-50 px-4 py-2">
-                                <textarea
-                                    value={rightText}
-                                    onChange={(e) => setRightText(e.target.value)}
-                                    placeholder="Enter or paste your modified text here..."
-                                    className="h-32 w-full resize-none border-0 bg-transparent font-mono text-sm focus:outline-none"
-                                />
-                            </div>
-                        </div>
+                    <div className="grid w-full gap-3">
+                        <Label htmlFor="original-text">Right Text</Label>
+                        <Textarea
+                            id="original-text"
+                            className="bg-slate-50"
+                            placeholder="Enter or paste your original text here..."
+                            value={rightText}
+                            onChange={(event) => setRightText(event.target.value)}
+                        />
                     </div>
                 </div>
                 {/* Diff Display */}
