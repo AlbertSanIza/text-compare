@@ -1,0 +1,29 @@
+{
+    "cSpell.language": "en",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.organizeImports": "explicit"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.guides.bracketPairs": "active",
+    "editor.linkedEditing": true,
+    "editor.quickSuggestions": {
+        "strings": "on"
+    },
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+    "files.insertFinalNewline": true,
+    "files.readonlyInclude": {
+        "**/route-tree.gen.ts": true,
+        "**/bun.lock": true
+    },
+    "files.watcherExclude": {
+        "**/route-tree.gen.ts": true,
+        "**/bun.lock": true
+    },
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "workbench.iconTheme": "material-icon-theme"
+}
