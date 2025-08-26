@@ -102,9 +102,11 @@ export default function App() {
     return (
         <div>
             <div className="bg-green-600 p-6">
-                <h1 className="mb-6 text-center text-6xl font-bold text-white">Text Compare</h1>
+                <h1 className="mb-6 text-center text-4xl font-semibold text-white">Text Compare</h1>
                 <div className="flex items-center justify-center">
-                    <Button onClick={handleClearAll}>Clear all</Button>
+                    <Button size="sm" onClick={handleClearAll}>
+                        Clear all
+                    </Button>
                 </div>
             </div>
             <div className="mx-auto flex max-w-7xl flex-col gap-6 p-6">
