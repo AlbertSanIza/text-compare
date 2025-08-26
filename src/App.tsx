@@ -1,5 +1,4 @@
 import { diffWords } from 'diff'
-import { ArrowDown } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -137,7 +136,6 @@ export default function App() {
                                                     {line.lineNumber}
                                                 </div>
                                                 <div className="flex-1 px-3 py-1">
-                                                    {line.type === 'added' && <ArrowDown className="mr-1 inline h-4 w-4 text-green-600" />}
                                                     {line.diffParts.map((part, partIndex) => (
                                                         <span key={partIndex} className={`whitespace-pre ${part.added ? 'bg-blue-200' : ''}`}>
                                                             {part.value}
