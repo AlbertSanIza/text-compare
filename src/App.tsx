@@ -1,6 +1,8 @@
 import { diffWords } from 'diff'
-import { ArrowDown, ArrowUp, Mail, Trash2 } from 'lucide-react'
+import { ArrowDown, ArrowUp } from 'lucide-react'
 import { useMemo, useState } from 'react'
+
+import { Button } from '@/components/ui/button'
 
 interface DiffLine {
     lineNumber: number
@@ -54,9 +56,7 @@ export default function App() {
         const leftLines = leftText.split('\n')
         const rightLines = rightText.split('\n')
         const maxLines = Math.max(leftLines.length, rightLines.length)
-
         const lines: DiffLine[] = []
-
         for (let i = 0; i < maxLines; i++) {
             const leftLine = leftLines[i] || ''
             const rightLine = rightLines[i] || ''
@@ -89,7 +89,6 @@ export default function App() {
                 }
             }
         }
-
         return lines
     }, [leftText, rightText])
 
@@ -98,36 +97,14 @@ export default function App() {
         setRightText('')
     }
 
-    const handleEmailComparison = () => {
-        const subject = encodeURIComponent('Text Comparison')
-        const body = encodeURIComponent(`Left Text:\n${leftText}\n\nRight Text:\n${rightText}`)
-        window.open(`mailto:?subject=${subject}&body=${body}`)
-    }
-
     return (
-        <div className="min-h-screen bg-gray-50">
-            <div className="bg-opacity-90 bg-green-600 px-6 py-8">
-                <div className="mx-auto max-w-6xl">
-                    <h1 className="mb-6 text-center text-4xl font-bold text-white">Text Compare</h1>
-                    <div className="flex items-center justify-between">
-                        <button
-                            onClick={handleEmailComparison}
-                            className="bg-opacity-20 hover:bg-opacity-30 flex items-center space-x-2 rounded-lg bg-white px-4 py-2 text-white transition-all"
-                        >
-                            <Mail className="h-4 w-4" />
-                            <span>Email this comparison</span>
-                        </button>
-                        <button
-                            onClick={handleClearAll}
-                            className="bg-opacity-20 hover:bg-opacity-30 flex items-center space-x-2 rounded-lg bg-white px-4 py-2 text-white transition-all"
-                        >
-                            <Trash2 className="h-4 w-4" />
-                            <span>Clear all</span>
-                        </button>
-                    </div>
+        <div>
+            <div className="bg-green-600 p-6">
+                <h1 className="mb-6 text-center text-6xl font-bold text-white">Text Compare</h1>
+                <div className="flex items-center justify-center">
+                    <Button onClick={handleClearAll}>Clear all</Button>
                 </div>
             </div>
-            {/* Main Comparison Area */}
             <div className="mx-auto max-w-6xl px-6 py-8">
                 <div className="grid grid-cols-2 gap-8">
                     {/* Left Text Area */}
@@ -185,7 +162,6 @@ export default function App() {
                                     ))}
                                 </div>
                             </div>
-
                             {/* Right Diff */}
                             <div className="bg-gray-50">
                                 <div className="border-b border-gray-200 bg-gray-100 px-4 py-2 font-medium text-gray-700">Modified</div>
