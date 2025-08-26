@@ -77,13 +77,15 @@ export default function App() {
 
     return (
         <div>
-            <div className="bg-green-600 p-6">
-                <h1 className="mb-6 text-center text-4xl font-semibold text-white">Text Compare</h1>
-                <div className="flex items-center justify-center">
-                    <Button onClick={handleClearAll}>Clear all</Button>
+            <div className="bg-green-600">
+                <div className="mx-auto flex max-w-6xl items-center justify-between p-4">
+                    <h1 className="text-center text-4xl font-semibold text-white">Text Compare</h1>
+                    <Button size="sm" onClick={handleClearAll}>
+                        Clear all
+                    </Button>
                 </div>
             </div>
-            <div className="mx-auto flex max-w-7xl flex-col gap-6 p-6">
+            <div className="mx-auto flex max-w-6xl flex-col gap-6 p-6">
                 <div className="flex items-start gap-6">
                     <div className="grid w-full gap-3">
                         <Label htmlFor="left-text">Left Text</Label>
