@@ -16,11 +16,9 @@
     },
     "files.insertFinalNewline": true,
     "files.readonlyInclude": {
-        "**/route-tree.gen.ts": true,
         "**/bun.lock": true
     },
     "files.watcherExclude": {
-        "**/route-tree.gen.ts": true,
         "**/bun.lock": true
     },
     "git.autofetch": true,
