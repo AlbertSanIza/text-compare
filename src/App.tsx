@@ -17,20 +17,20 @@ interface DiffLine {
 }
 
 export default function App() {
-    const [leftText, setLeftText] = useState(localStorage.getItem('text-compare-left') || '')
-    const [rightText, setRightText] = useState(localStorage.getItem('text-compare-right') || '')
+    const [originalText, setOriginalText] = useState(localStorage.getItem('text-compare-original') || '')
+    const [modifiedText, setModifiedText] = useState(localStorage.getItem('text-compare-modified') || '')
 
     useEffect(() => {
-        localStorage.setItem('text-compare-left', leftText)
-    }, [leftText])
+        localStorage.setItem('text-compare-original', originalText)
+    }, [originalText])
 
     useEffect(() => {
-        localStorage.setItem('text-compare-right', rightText)
-    }, [rightText])
+        localStorage.setItem('text-compare-modified', modifiedText)
+    }, [modifiedText])
 
     const diffLines = useMemo(() => {
-        const leftLines = leftText.split('\n')
-        const rightLines = rightText.split('\n')
+        const leftLines = originalText.split('\n')
+        const rightLines = modifiedText.split('\n')
         const maxLines = Math.max(leftLines.length, rightLines.length)
         const lines: DiffLine[] = []
         for (let i = 0; i < maxLines; i++) {
@@ -68,11 +68,11 @@ export default function App() {
             }
         }
         return lines
-    }, [leftText, rightText])
+    }, [originalText, modifiedText])
 
     const handleClearAll = () => {
-        setLeftText('')
-        setRightText('')
+        setOriginalText('')
+        setModifiedText('')
     }
 
     return (
@@ -88,27 +88,27 @@ export default function App() {
             <div className="mx-auto flex max-w-6xl flex-col gap-6 p-6">
                 <div className="flex items-start gap-6">
                     <div className="grid w-full gap-3">
-                        <Label htmlFor="left-text">Left Text</Label>
-                        <Textarea
-                            id="left-text"
-                            className="bg-slate-50"
-                            placeholder="Enter or paste your left text here..."
-                            value={leftText}
-                            onChange={(event) => setLeftText(event.target.value)}
-                        />
-                    </div>
-                    <div className="grid w-full gap-3">
-                        <Label htmlFor="original-text">Right Text</Label>
+                        <Label htmlFor="original-text">Original</Label>
                         <Textarea
                             id="original-text"
                             className="bg-slate-50"
+                            placeholder="Enter or paste your left text here..."
+                            value={originalText}
+                            onChange={(event) => setOriginalText(event.target.value)}
+                        />
+                    </div>
+                    <div className="grid w-full gap-3">
+                        <Label htmlFor="modified-text">Modified</Label>
+                        <Textarea
+                            id="modified-text"
+                            className="bg-slate-50"
                             placeholder="Enter or paste your original text here..."
-                            value={rightText}
-                            onChange={(event) => setRightText(event.target.value)}
+                            value={modifiedText}
+                            onChange={(event) => setModifiedText(event.target.value)}
                         />
                     </div>
                 </div>
-                {(leftText.length > 0 || rightText.length > 0) && (
+                {(originalText.length > 0 || modifiedText.length > 0) && (
                     <div>
                         <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
                             <div className="grid grid-cols-2 divide-x divide-gray-200">
@@ -116,7 +116,7 @@ export default function App() {
                                 <div className="bg-gray-50">
                                     <div className="border-b border-gray-200 bg-gray-100 px-4 py-2 font-medium text-gray-700">Original</div>
                                     <div className="font-mono text-sm">
-                                        {leftText.split('\n').map((line, index) => (
+                                        {originalText.split('\n').map((line, index) => (
                                             <div key={`left-${index}`} className="flex hover:bg-gray-100">
                                                 <div className="w-16 flex-shrink-0 border-r border-gray-200 bg-gray-50 px-2 py-1 text-right text-gray-500">
                                                     {index + 1}
