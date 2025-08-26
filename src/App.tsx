@@ -1,6 +1,6 @@
 import { diffWords } from 'diff'
 import { ArrowDown } from 'lucide-react'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
@@ -18,41 +18,16 @@ interface DiffLine {
 }
 
 export default function App() {
-    const [leftText, setLeftText] = useState(`{
-  "cSpell.language": "en",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  },
-  "editor.formatOnSave": true,
-  "files.associations": {
-    "*.css": "tailwindcss"
-  },
-  "git.autofetch": true,
-  "tailwindCSS.classFunctions": [
-    "clsx",
-    "cn",
-    "tw"
-  ],
-  "**/route-tree.gen.ts": true
-}`)
+    const [leftText, setLeftText] = useState(localStorage.getItem('text-compare-left') || '')
+    const [rightText, setRightText] = useState(localStorage.getItem('text-compare-right') || '')
 
-    const [rightText, setRightText] = useState(`{
-  "cSpell.language": "en",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  },
-  "edisfsdfsdftor.formatOnSave": true,
-  "files.associations": {
-    "*.csdfsss": "tailwindcss"
-  },
-  "git.autofetch": true,
-  "tailwindCSS.classFunctions": [
-    "clsx",
-    "cn",
-    "tw"
-  ],
-  "**/rousdfsdfte-tree.gsdfsdfen.ts": true
-}`)
+    useEffect(() => {
+        localStorage.setItem('text-compare-left', leftText)
+    }, [leftText])
+
+    useEffect(() => {
+        localStorage.setItem('text-compare-right', rightText)
+    }, [rightText])
 
     const diffLines = useMemo(() => {
         const leftLines = leftText.split('\n')
