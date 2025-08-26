@@ -1,5 +1,5 @@
 import { diffWords } from 'diff'
-import { ArrowDown, ArrowUp } from 'lucide-react'
+import { ArrowDown } from 'lucide-react'
 import { useMemo, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -62,8 +62,8 @@ export default function App() {
         for (let i = 0; i < maxLines; i++) {
             const leftLine = leftLines[i] || ''
             const rightLine = rightLines[i] || ''
-
             if (leftLine === rightLine) {
+                // Both lines are identical - show as unchanged
                 lines.push({
                     lineNumber: i + 1,
                     content: leftLine,
@@ -71,10 +71,11 @@ export default function App() {
                     diffParts: [{ value: leftLine }]
                 })
             } else {
+                // Lines are different - calculate diff for highlighting
                 const diff = diffWords(leftLine, rightLine)
                 const hasChanges = diff.some((part) => part.added || part.removed)
-
                 if (hasChanges) {
+                    // Show modified line with diff highlighting
                     lines.push({
                         lineNumber: i + 1,
                         content: rightLine,
@@ -82,11 +83,12 @@ export default function App() {
                         diffParts: diff
                     })
                 } else {
+                    // Fallback for edge cases
                     lines.push({
                         lineNumber: i + 1,
-                        content: leftLine,
-                        type: 'removed',
-                        diffParts: [{ value: leftLine }]
+                        content: rightLine,
+                        type: 'added',
+                        diffParts: [{ value: rightLine }]
                     })
                 }
             }
@@ -141,18 +143,13 @@ export default function App() {
                             <div className="bg-gray-50">
                                 <div className="border-b border-gray-200 bg-gray-100 px-4 py-2 font-medium text-gray-700">Original</div>
                                 <div className="font-mono text-sm">
-                                    {diffLines.map((line, index) => (
+                                    {leftText.split('\n').map((line, index) => (
                                         <div key={`left-${index}`} className="flex hover:bg-gray-100">
                                             <div className="w-16 flex-shrink-0 border-r border-gray-200 bg-gray-50 px-2 py-1 text-right text-gray-500">
-                                                {line.lineNumber}
+                                                {index + 1}
                                             </div>
                                             <div className="flex-1 px-3 py-1">
-                                                {line.type === 'removed' && <ArrowUp className="mr-1 inline h-4 w-4 text-green-600" />}
-                                                {line.diffParts.map((part, partIndex) => (
-                                                    <span key={partIndex} className={part.removed ? 'bg-red-200' : ''}>
-                                                        {part.value}
-                                                    </span>
-                                                ))}
+                                                <span className="whitespace-pre">{line}</span>
                                             </div>
                                         </div>
                                     ))}
@@ -170,7 +167,7 @@ export default function App() {
                                             <div className="flex-1 px-3 py-1">
                                                 {line.type === 'added' && <ArrowDown className="mr-1 inline h-4 w-4 text-green-600" />}
                                                 {line.diffParts.map((part, partIndex) => (
-                                                    <span key={partIndex} className={part.added ? 'bg-blue-200' : ''}>
+                                                    <span key={partIndex} className={`whitespace-pre ${part.added ? 'bg-blue-200' : ''}`}>
                                                         {part.value}
                                                     </span>
                                                 ))}
