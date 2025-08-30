@@ -47,7 +47,7 @@ export default function App() {
                         <Label htmlFor="original-text">Original</Label>
                         <Textarea
                             id="original-text"
-                            className="bg-slate-50"
+                            className="bg-slate-50 font-mono text-xs"
                             placeholder="Enter or paste your original text here..."
                             value={originalText}
                             onChange={(event) => setOriginalText(event.target.value)}
@@ -57,7 +57,7 @@ export default function App() {
                         <Label htmlFor="modified-text">Modified</Label>
                         <Textarea
                             id="modified-text"
-                            className="bg-slate-50"
+                            className="bg-slate-50 font-mono text-xs"
                             placeholder="Enter or paste your modified text here..."
                             value={modifiedText}
                             onChange={(event) => setModifiedText(event.target.value)}
