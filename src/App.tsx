@@ -1,9 +1,10 @@
-import { diffChars, type ChangeObject } from 'diff'
+import { diffChars } from 'diff'
 import { useEffect, useMemo, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+import { cn } from '@/lib/utils'
 
 export default function App() {
     const [originalText, setOriginalText] = useState(localStorage.getItem('text-compare-original') || '')
@@ -23,26 +24,6 @@ export default function App() {
         }
         return diffChars(originalText, modifiedText)
     }, [originalText, modifiedText])
-
-    const renderDiffText = (diffItems: ChangeObject<string>[]) => {
-        return diffItems.map((item, index) => {
-            if (item.removed) {
-                return (
-                    <span key={index} className="rounded bg-red-200 text-red-800">
-                        {item.value}
-                    </span>
-                )
-            } else if (item.added) {
-                return (
-                    <span key={index} className="rounded bg-green-200 text-green-800">
-                        {item.value}
-                    </span>
-                )
-            } else {
-                return <span key={index}>{item.value}</span>
-            }
-        })
-    }
 
     return (
         <div>
@@ -86,7 +67,11 @@ export default function App() {
                 <div className="rounded-md border bg-slate-50 p-6">
                     <div className="font-mono text-sm whitespace-pre-wrap">
                         {diffResult.length > 0 ? (
-                            renderDiffText(diffResult)
+                            diffResult.map((item, index) => (
+                                <span key={index} className={cn(item.added && 'bg-green-200 text-green-800', item.removed && 'bg-red-200 text-red-800')}>
+                                    {item.value}
+                                </span>
+                            ))
                         ) : (
                             <div className="text-center text-gray-500">Enter text in both fields to see the comparison</div>
                         )}
