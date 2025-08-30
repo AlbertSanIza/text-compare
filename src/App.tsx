@@ -67,11 +67,24 @@ export default function App() {
                 <div className="rounded-md border bg-slate-50 p-6">
                     <div className="font-mono text-sm whitespace-pre-wrap">
                         {diffResult.length > 0 ? (
-                            diffResult.map((item, index) => (
-                                <span key={index} className={cn(item.added && 'bg-green-200 text-green-800', item.removed && 'bg-red-200 text-red-800')}>
+                            diffResult.map((item, index) => {
+                                const isOnlyNewLines = item.value
+                                    .trim()
+                                    .split('\n')
+                                    .every((line) => line === '')
+                                return (
+                                    <span
+                                        key={index}
+                                        className={cn(
+                                            (item.added || isOnlyNewLines) && 'bg-green-200',
+                                            item.removed && 'bg-red-200 text-red-800',
+                                            isOnlyNewLines && 'block w-full'
+                                        )}
+                                    >
                                     {item.value}
                                 </span>
-                            ))
+                                )
+                            })
                         ) : (
                             <div className="text-center text-gray-500">Enter text in both fields to see the comparison</div>
                         )}
