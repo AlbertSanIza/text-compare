@@ -28,13 +28,13 @@ export default function App() {
         return diffItems.map((item, index) => {
             if (item.removed) {
                 return (
-                    <span key={index} className="rounded bg-red-200 px-1 text-red-800">
+                    <span key={index} className="rounded bg-red-200 text-red-800">
                         {item.value}
                     </span>
                 )
             } else if (item.added) {
                 return (
-                    <span key={index} className="rounded bg-green-200 px-1 text-green-800">
+                    <span key={index} className="rounded bg-green-200 text-green-800">
                         {item.value}
                     </span>
                 )
