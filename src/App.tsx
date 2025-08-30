@@ -18,7 +18,9 @@ export default function App() {
     }, [modifiedText])
 
     const diffResult = useMemo(() => {
-        if (!originalText && !modifiedText) return []
+        if (!originalText && !modifiedText) {
+            return []
+        }
         return diffChars(originalText, modifiedText)
     }, [originalText, modifiedText])
 
