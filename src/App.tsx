@@ -88,7 +88,7 @@ export default function App() {
                         {diffResult.length > 0 ? (
                             renderDiffText(diffResult)
                         ) : (
-                            <span className="text-gray-500">Enter text in both fields to see the comparison</span>
+                            <div className="text-center text-gray-500">Enter text in both fields to see the comparison</div>
                         )}
                     </div>
                 </div>
