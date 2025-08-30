@@ -70,17 +70,18 @@ export default function App() {
         return lines
     }, [originalText, modifiedText])
 
-    const handleClearAll = () => {
-        setOriginalText('')
-        setModifiedText('')
-    }
-
     return (
         <div>
             <div className="bg-green-600">
                 <div className="mx-auto flex max-w-6xl items-center justify-between p-4">
                     <h1 className="text-center text-4xl font-semibold text-white">Text Compare</h1>
-                    <Button size="sm" onClick={handleClearAll}>
+                    <Button
+                        size="sm"
+                        onClick={() => {
+                            setOriginalText('')
+                            setModifiedText('')
+                        }}
+                    >
                         Clear all
                     </Button>
                 </div>
