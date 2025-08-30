@@ -81,8 +81,8 @@ export default function App() {
                                             isOnlyNewLines && 'block w-full'
                                         )}
                                     >
-                                    {item.value}
-                                </span>
+                                        {item.value}
+                                    </span>
                                 )
                             })
                         ) : (
