@@ -74,7 +74,7 @@ export default function App() {
                                     <div key={index}>{index + 1}</div>
                                 ))}
                             </div>
-                            <div className="flex-1 whitespace-pre-wrap">
+                            <div className="flex-1 overflow-x-auto whitespace-pre">
                                 {diffResult.map((item, index) => {
                                     const isOnlyNewLines = item.value
                                         .trim()
