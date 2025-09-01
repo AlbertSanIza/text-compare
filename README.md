@@ -1,5 +1,7 @@
 # Text Compare
 
+![Text Compare](https://github.com/user-attachments/assets/2cfc2ce4-b1e7-4407-9e90-6b4372e64454)
+
 A modern, responsive web application for comparing text differences built with React, TypeScript, and Tailwind CSS.
 
 ## Features
